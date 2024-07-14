@@ -1,5 +1,5 @@
 const express = require("express");
-const app=express()
+const app = express();
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const router = express.Router();
@@ -8,7 +8,8 @@ const JWT_SECRET = "guvilearningportal$1567";
 var jwt = require("jsonwebtoken");
 const fetchuser = require("../middlewere/Fetchuser");
 
-router.post("/createUser",
+router.post(
+  "/createUser",
 
   [
     body("name", "Enter a valid Name").isLength({ min: 3 }),
@@ -23,7 +24,7 @@ router.post("/createUser",
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    console.log(errors)
+    console.log(errors);
     let useEmail = await User.findOne({ email: req.body.email });
     let useMobile = await User.findOne({ mobile: req.body.mobile });
 
@@ -41,94 +42,81 @@ router.post("/createUser",
         email: req.body.email,
         password: hassPassword,
         mobile: req.body.mobile,
-        
+        isAdmin: req.body.isAdmin,
       });
       const data = {
-        luser: {
-          id: newUser._id,
+        user: {
+          id: newUser.id,
           name: newUser.name,
-          
+          isAdmin: newUser.isAdmin,
         },
       };
-      
-      let name = data.luser.name;
+      let isAdmin = data.user.isAdmin;
+      let name = data.user.name;
       const authToken = jwt.sign(data, JWT_SECRET);
       success = true;
-      res.json({ authToken, success, name });
-    }
-    catch (error) {
+      res.json({ authToken, success, name, isAdmin });
+    } catch (error) {
       console.log(error);
-      res.status(500).json({ message:error.message });
+      res.status(500).json({ message: error.message });
     }
-  });
- // console.log(req.body);
- //login 
- router.post("/loginUser",
- [
-  body("email", "Enter a valid email").isEmail(),
+  }
+);
+// console.log(req.body);
+//login
+router.post(
+  "/loginUser",
+  [
+    body("email", "Enter a valid email").isEmail(),
     body("password", "Enter a valid Password").isLength({ min: 3 }),
- ], async(req,res)=>{
+  ],
+  async (req, res) => {
     //let success=false;
-    let success = true;
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-   const {email,password}=req.body;
-   try{
-    let user =await User.findOne({email})
-    if(!user){
-      return res
-      .status(400)
-      .json({error:"No user with this email"});
-    }
-    const passwordCompare=await bcrypt.compare(password,user.password);
-    if(!passwordCompare){
-      return res
-      .status(400)
-      .json({error:"wrong password"});
-
-    }
-    const payload = {
-      luser: {
-        id: user ? user._id : null,
-        name: user ? user.name : null,
-        
-      }
-    };
-    
-    if (!user || !user.id || !user.name) {
-      return res.status(400).json({ error: "Invalid user data" });
-    }
-    
-    
-    // const isAdmin = payload.luser.isAdmin;
-    const name = payload.luser.name;
-    const authToken = jwt.sign(payload, JWT_SECRET);
-    res.json({ authToken, success, name });
-  }
-
-catch (error) {
-  console.log(error);
-  res.status(500).json({ message:error.message });
-}
-
-});
-router.get(
-  "/getUser",
-  fetchuser,
-  async (req, res) => {
+    const { email, password } = req.body;
     try {
-      const user = await User.findById(req.user.luser.id)
+      let user = await User.findOne({ email });
       if (!user) {
-        return res.status(404).send("User not found");
+        return res.status(400).json({ error: "No user with this email" });
       }
-      res.send(user);
+      const passwordCompare = await bcrypt.compare(password, user.password);
+      if (!passwordCompare) {
+        return res.status(400).json({ error: "wrong password" });
+      }
+      const payload = {
+        luser: {
+          id: user ? user.id : null,
+          name: user ? user.name : null,
+          isAdmin: user ? user.isAdmin : null,
+        },
+      };
+
+      if (!user || !user.id || !user.name) {
+        return res.status(400).json({ error: "Invalid user data" });
+      }
+
+      success = true;
+      const isAdmin = payload.luser.isAdmin;
+      const name = payload.luser.name;
+      const authToken = jwt.sign(payload, JWT_SECRET);
+      res.json({ authToken, success, name, isAdmin });
     } catch (error) {
       console.log(error);
-      res.status(500).send("Internal server Error");
+      res.status(500).json({ message: error.message });
     }
   }
 );
-
+router.get("/getUser", fetchuser, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server Error");
+  }
+});
 module.exports = router;

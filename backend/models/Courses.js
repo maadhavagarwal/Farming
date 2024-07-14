@@ -10,7 +10,7 @@ const CourseSchema = new Schema({
     name: { type: String, trim: true, required: true, maxlength: 1000 },
     description: { type: String, trim: true, required: true, maxlength: 5000 },
     image: { type: String, trim: true, required: true, maxlength: 2000 },
-
+    isAdmin:{type: Boolean, default: false},
     price: { type: Number, required: true },
     date: { type: Date, default: Date.now }
 });

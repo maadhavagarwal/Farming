@@ -4,6 +4,7 @@ import FormContainer from "../FormContainer";
 import Messages from "../messages";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./login.css"
 function Signup() {
   let navigate = useNavigate();
   const [fname, setFname] = useState("");
@@ -54,7 +55,7 @@ function Signup() {
             localStorage.setItem("success", jsn.success);
             localStorage.setItem("isAmin", jsn.isAdmin);   
             setMessage("SignUp Success");
-          navigate("/login");
+          navigate("/");
         }
       } catch (error) {
         setMessage("Something went wrog");
@@ -71,25 +72,27 @@ function Signup() {
 
   return (
     <>
+    <div className="signup">
       <FormContainer>
-        <Form onSubmit={submithandler}>
+        <Form onSubmit={submithandler} >
           <h1 className="text-centre">Signup</h1>
           {message && <Messages varient="sucess">{message}</Messages>}
           <i className="fa-regular fa-user"></i>
           <Form.Group>
-            <Form.Label>First name</Form.Label>
+            <Form.Label className="label">First name</Form.Label>
             <Form.Control
              name="fname"
               type="text"
-              placeholder="Enter your last  name"
+              placeholder="Enter your first  name"
               value={fname}
               onChange={(e) => setFname(e.target.value)}
               required
+              className="input"
             ></Form.Control>
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>last name</Form.Label>
+            <Form.Label className="label">last name</Form.Label>
             <Form.Control
              name="lname"
               type="text"
@@ -97,11 +100,12 @@ function Signup() {
               value={lname}
               onChange={(e) => setLname(e.target.value)}
               required
+              className="input"
             ></Form.Control>
           </Form.Group>
           <i className="fa-regular fa-envelope"></i>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label className="label">Email</Form.Label>
             <Form.Control
               name="email"
               type="text"
@@ -109,11 +113,12 @@ function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="input"
             ></Form.Control>
           </Form.Group>
           <i className="fa-solid fa-lock"></i>
           <Form.Group>
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="label">Password</Form.Label>
             <Form.Control
               name="pass1"
               type="text"
@@ -121,11 +126,12 @@ function Signup() {
               value={pass1}
               onChange={(e) => setPass1(e.target.value)}
               required
+              className="input"
             ></Form.Control>
           </Form.Group>
           <i className="fa-regular fa-lock"></i>
           <Form.Group>
-            <Form.Label>Confrim password</Form.Label>
+            <Form.Label className="label">Confrim password</Form.Label>
             <Form.Control
               name="pass2"
               type="text"
@@ -133,11 +139,12 @@ function Signup() {
               value={pass2}
               onChange={(e) => setPass2(e.target.value)}
               required
+              className="input"
             ></Form.Control>
           </Form.Group>
           <i className="fa-solid fa-mobile"></i>
           <Form.Group>
-            <Form.Label>Mobile Numbere</Form.Label>
+            <Form.Label className="label">Mobile Number</Form.Label>
             <Form.Control
              name="mobile"
               type="Number"
@@ -145,10 +152,19 @@ function Signup() {
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
               required
+              className="input"
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-         
+          <Form.Check
+    required
+    label="Do you want to be admin"
+    checked={isAdmin} // Ensure that the checkbox state is controlled by the isAdmin state
+    onChange={(e) => setIsAdmin(e.target.checked)} // Set isAdmin to true or false based on checkbox state
+    feedbackType="invalid"
+    id="isAdmin"
+    className="check"
+/>
 </Form.Group>
 <Form.Group className="mb-3">
         <Form.Check
@@ -156,6 +172,7 @@ function Signup() {
           label="Agree to terms and conditions"
           feedback="You must agree before submitting."
           feedbackType="invalid"
+          className="check"
         />
       </Form.Group>
           <Button className="mt-3" type="submit" variant="success">
@@ -163,6 +180,7 @@ function Signup() {
           </Button>
         </Form>
       </FormContainer>
+      </div>
     </>
   );
 }

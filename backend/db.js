@@ -1,9 +1,11 @@
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
 
-const mongoURI="mongodb://localhost:27017/farm";
+const mongoURI = "mongodb://localhost:27017/farm";
 //const connectToMongo=()=>mongoose.connect(mongoURI).then(()=>console.log("Mongo Connected")).catch((err)=>console.log(err));
-const connectToMongo=mongoose.connect(mongoURI).then(()=>console.log("Mongo Connected")).catch((err)=>console.log("mongo not connected"));
-
+const connectToMongo = mongoose
+  .connect(mongoURI)
+  .then(() => console.log("Mongo Connected"))
+  .catch((err) => console.log("mongo not connected"));
 
 //mongodb://localhost:27017/guvi-react
 

@@ -54,12 +54,6 @@ function Header() {
               placement="end"
               variant="dark"
             >
-              <Offcanvas.Header closeButton className='bg-success' >
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Soil Information
-                </Offcanvas.Title>
-                
-              </Offcanvas.Header>
               
               <Offcanvas.Body className='bg-dark text-light'>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -5,10 +5,12 @@ import Intro from './download.jpeg';
 import Soil from "./images.jpeg"
 import crop from "./crops-growing-in-thailand.jpg"
 import "./home.css"
+import Header from './header';
 function Homes() {
 
   return (
    <>
+   {/* <Header/> */}
      <div className="container">
        <img src={ExampleCarouselImage} alt="Example Carousel Image" className="img" />
        <h1 className='main'>Welcome to Soil Information site</h1>

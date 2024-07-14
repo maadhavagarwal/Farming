@@ -4,7 +4,8 @@ import FormContainer from '../FormContainer'
 import Messages from '../messages'
 import {useState} from 'react'
 import {  useNavigate } from "react-router-dom";
-
+// import Header from '../header'
+import "./login.css"
 function Login() {
   let navigate = useNavigate();
   
@@ -39,13 +40,13 @@ console.log(jsonData);
       localStorage.setItem("token", jsonData.authToken);
       localStorage.setItem("name", jsonData.name);
       localStorage.setItem("success", jsonData.success);
-   //   localStorage.setItem("isAdmin", jsonData.isAdmin);   
+      localStorage.setItem("isAdmin", jsonData.isAdmin);   
             
       setMessage("Login Success");
       navigate("/");
       setEmail("");
       setPass1("");
-     // setIsAdmin("")
+     setIsAdmin("")
     }
   } catch (error) {
     setMessage(error.message); // Extract error message from caught error object
@@ -53,13 +54,16 @@ console.log(jsonData);
 };
   return (
      <>
+     {/* <Header/> */}
+     <div className='login'>
    <FormContainer>
+
         <Form onSubmit={submitHandler}>
             <h1 className='text-centre'>Login </h1>
             {message && <Messages varient='sucess'>{message}</Messages>}
-            <i className="fa-regular fa-envelope"></i>
+            {/* <i className="fa-regular fa-envelope"></i> */}
             <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label className='label'>Email</Form.Label>
             <Form.Control
               name="email"
               type="text"
@@ -67,11 +71,11 @@ console.log(jsonData);
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-            ></Form.Control>
+             className='input'></Form.Control>
            </Form.Group>
-          <i className="fa-regular fa-lock"></i>
+          {/* <i className="fa fa-lock" ></i> */}
           <Form.Group>
-            <Form.Label>password</Form.Label>
+            <Form.Label className='label'>password</Form.Label>
             <Form.Control
               name="Pass1"
               type="text"
@@ -79,14 +83,35 @@ console.log(jsonData);
               value={Pass1}
               onChange={(e) => setPass1(e.target.value)}
               required
-            ></Form.Control>
+            className='input'></Form.Control>
           </Form.Group>
           <Form.Group>
   
 </Form.Group>
+<Form.Group >
+        <Form.Check
+          required
+          label="Agree to terms and conditions"
+          feedback="You must agree before submitting."
+          feedbackType="invalid"
+          className='check'
+        />
+      </Form.Group>
+      <Form.Group>
+          <Form.Check
+    required
+    label="Do you want to be admin"
+    checked={isAdmin} // Ensure that the checkbox state is controlled by the isAdmin state
+    onChange={(e) => setIsAdmin(e.target.checked)} // Set isAdmin to true or false based on checkbox state
+    feedbackType="invalid"
+    id="isAdmin"
+    className='check'
+/>
+</Form.Group>
           <Button className='mt-3' type='submit' variant='success'>login</Button>
         </Form>
     </FormContainer>
+    </div>
    </>
   )
 }
