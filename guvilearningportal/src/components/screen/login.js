@@ -18,7 +18,7 @@ const submitHandler = async (e) => {
   e.preventDefault(); // Uncomment this line to prevent the default form submission behavior
 
   try {
-    const response = await fetch("http://localhost:5000/api/auth/loginUser", {
+    const response = await fetch("https://farming-1.onrender.com/api/auth/loginUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
