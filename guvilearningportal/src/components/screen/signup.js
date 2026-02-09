@@ -27,7 +27,7 @@ function Signup() {
     else {
       try {
         const response = await fetch(
-          "https://farming-gint.onrender.com/api/auth/createUser",
+          "https://farming-1.onrender.com/api/auth/createUser",
           // Add http:// here -----------^
           {
             method: "POST",
