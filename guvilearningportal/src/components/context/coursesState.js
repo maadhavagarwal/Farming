@@ -14,7 +14,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
   
   const getCourses = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/add/fetchAllCourses", {
+      const response = await fetch("https://farming-gint.onrender.com/api/add/fetchAllCourses", {
         method: "GET",
         headers: {
           "Content-Type": 'application/json',
@@ -29,7 +29,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
   };
   const getAdminCourses = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/add/fetchAllCoursesAdmin", {
+      const response = await fetch("https://farming-gint.onrender.com/api/add/fetchAllCoursesAdmin", {
         method: "GET",
         headers: {
           "Content-Type": 'application/json',
@@ -46,7 +46,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
 
   const addCourses = async (cname, desc, image, price) => {
     try {
-      const response =await fetch("http://localhost:5000/api/add/addData",{
+      const response =await fetch("https://farming-gint.onrender.com/api/add/addData",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
   const addEnrollment = async (courseId,Name, paymentId, Address) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/course/enroll/${courseId}`,
+        `https://farming-gint.onrender.com/api/course/enroll/${courseId}`,
         {
           method: "POST",
           headers: {
@@ -95,7 +95,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
   const deleteCourses = async (courseId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/add/deleteCourse/${courseId}`,
+        `https://farming-gint.onrender.com/api/add/deleteCourse/${courseId}`,
         {
           method: "DELETE",
           headers: {
@@ -113,7 +113,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
 
   const getCoursesEnrollments = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/course/fetchAllEnrollment", {
+      const response = await fetch("https://farming-gint.onrender.com/api/course/fetchAllEnrollment", {
         method: "GET",
         headers: {
          
@@ -132,7 +132,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
   }, [enrollCourses]);
   const getCoursesEnrollmentsAdmin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/course/fetchAllEnrollmentAdmin", {
+      const response = await fetch("https://farming-gint.onrender.com/api/course/fetchAllEnrollmentAdmin", {
         method: "GET",
         headers: {
          
@@ -152,7 +152,7 @@ const [userdetail, setUserdetail] = useState(coursesInitial);
  
    const getUserDetail = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/getUser", {
+      const response = await fetch("https://farming-gint.onrender.com/api/auth/getUser", {
         method: "GET",
         headers: {
             "auth-token": localStorage.getItem('token')
