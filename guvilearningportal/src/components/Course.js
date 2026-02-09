@@ -69,13 +69,6 @@ function Course() {
           </Col>
           <Col md={3}>
             <Card>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Link to={`/enroll/${course._id}`}>
-                    <Button className="btn-black btn-sucess">Enroll now</Button>
-                  </Link>
-                </ListGroup.Item>
-              </ListGroup>
             </Card>
           </Col>
         </Row>

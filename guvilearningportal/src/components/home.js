@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import HomeScreen from './screen/HomeScreen';
 import coursesContext from './context/coursesContext';
 import { useNavigate } from 'react-router-dom';
-
+import "./home.css"
 function Home() {
   let navigate = useNavigate();
   const context = useContext(coursesContext);

@@ -1,40 +1,113 @@
-import { useState } from 'react';
-// import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from './Farming.png';
-import Intro from './download.jpeg';
-import Soil from "./images.jpeg"
-import crop from "./crops-growing-in-thailand.jpg"
-import "./home.css"
-import Header from './header';
-function Homes() {
+import { motion } from "framer-motion";
+import ExampleCarouselImage from "./Farming.png";
+import Intro from "./download.jpeg";
+import Soil from "./images.jpeg";
+import crop from "./crops-growing-in-thailand.jpg";
+import "./home.css";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0 },
+};
+
+function Homes() {
   return (
-   <>
-   {/* <Header/> */}
-     <div className="container">
-       <img src={ExampleCarouselImage} alt="Example Carousel Image" className="img" />
-       <h1 className='main'>Welcome to Soil Information site</h1>
-     </div>
-     <div className="intro">
-      <h1 className='text1'>Introduction</h1>
-     <h1 className="text">In agriculture, matching crops to the right soil type is essential for optimal growth and yield. The Agricultural Soil and Crop Information Site exists to simplify this process by providing a comprehensive resource that connects soil characteristics with suitable crops.</h1>
-       <img src={Intro} alt="Example Carousel Image" className='img2' />
-      
-     </div>
-     <div className="soil">
-       <h1 className='soil-text'>Soil Information</h1>
-       <h1 className="soil-info">The site offers detailed information on various soil types, including their physical, chemical, and biological properties. Users can access this information through a user-friendly interface, allowing them to quickly find the soil characteristics that match their specific needs.</h1>
-       <img src={Soil} alt="Example Carousel Image" className='soil-img' />
-     </div>
-     <div className="Crop">
-      <h1 className='text1'>Crop Information</h1>
-     <h1 className="text">A plant or animal or plant or animal product that can be grown and harvested extensively for profit or subsistence. Get tailored advice on which crops thrive in specific soils.</h1>
-       <img src={crop} alt="Example Carousel Image" className='img2' />
-      
-     </div>
-   </>
+    <>
+      {/* HERO SECTION */}
+      <div className="hero">
+        <motion.img
+          src={ExampleCarouselImage}
+          alt="Farming"
+          className="hero-img"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.2 }}
+        />
+        <motion.h1
+          className="hero-title"
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Welcome to Soil Information Site 🌱
+        </motion.h1>
+      </div>
+
+      {/* INTRO */}
+      <motion.section
+        className="section intro"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="content">
+          <h1>Introduction</h1>
+          <p>
+            Matching crops with the right soil is essential for higher yield.
+            Our platform connects soil characteristics with suitable crops in a
+            simple, farmer-friendly way.
+          </p>
+        </div>
+        <motion.img
+          src={Intro}
+          alt="Intro"
+          className="section-img"
+          whileHover={{ scale: 1.05 }}
+        />
+      </motion.section>
+
+      {/* SOIL */}
+      <motion.section
+        className="section soil"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.img
+          src={Soil}
+          alt="Soil"
+          className="section-img"
+          whileHover={{ scale: 1.05 }}
+        />
+        <div className="content">
+          <h1>Soil Information</h1>
+          <p>
+            Learn about physical, chemical, and biological soil properties.
+            Identify soil types easily and understand what works best for your
+            land.
+          </p>
+        </div>
+      </motion.section>
+
+      {/* CROP */}
+      <motion.section
+        className="section crop"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="content">
+          <h1>Crop Information</h1>
+          <p>
+            Get tailored crop recommendations based on soil type, climate, and
+            conditions — maximizing productivity.
+          </p>
+        </div>
+        <motion.img
+          src={crop}
+          alt="Crop"
+          className="section-img"
+          whileHover={{ scale: 1.05 }}
+        />
+      </motion.section>
+    </>
   );
 }
-
 
 export default Homes;

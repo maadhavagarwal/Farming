@@ -11,7 +11,7 @@ import Signup from './components/screen/signup';
 import Course from './components/Course'
 import CoursesState from './components/context/coursesState'
 //  import Admin from "../../admin-app/src/Admin/Admin"
-import EnrollScreen from './components/screen/EnrollScreen';
+
 import Profile from './components/screen/profile';
 // import Navbar from '../../admin-app/src/Admin/navbar'
 import Admin from './components/screen/admin'
@@ -38,7 +38,7 @@ function App() {
         <Route path="/login" element={<Login/>} extact></Route>
         <Route path="/course/:id" element={<Course/>} extact></Route>
         
-        <Route path="/enroll/:id" element={<EnrollScreen/>} extact></Route>
+        
         <Route path="/profile" element={<Profile/>} extact></Route>
         <Route path="/admin" element={<Admin/>} extact></Route> 
         </Routes>

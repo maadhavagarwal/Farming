@@ -24,7 +24,7 @@ function Header() {
         <Navbar key={expand} expand={expand} className="bg-body-lg navbar-danger mb-1 bg-success opacity-100 ">
           <Container fluid>
             <Navbar.Brand href="\" className='text-dark'>Soil Information</Navbar.Brand>
-            <Navbar.Toggle className='bg-success border-radius-light'aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            {/* <Navbar.Toggle className='bg-success border-radius-light'aria-controls={`offcanvasNavbar-expand-${expand}`} /> */}
             <LinkContainer to="/learning">
                             <Nav.Link className='text-lg'>Soil Detail</Nav.Link>
                         </LinkContainer>
@@ -48,24 +48,7 @@ function Header() {
                                 <Nav.Link>Login</Nav.Link>
                             </LinkContainer>
                         )}
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end"
-              variant="dark"
-            >
-              
-              <Offcanvas.Body className='bg-dark text-light'>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '500px' }} navbarScroll>
-                        
-                    </Nav>
-                </Navbar.Collapse>
-            
-
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
+          
           </Container>
         </Navbar>
       ))}

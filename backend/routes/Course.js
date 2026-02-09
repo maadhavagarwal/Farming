@@ -58,11 +58,16 @@ router.get("/fetchAllCourses",fetchuser,async(req,res)=>{
   res.json(data);
 
 });
+
 router.get("/fetchAllCoursesAdmin",fetchuser,async(req,res)=>{
   const data=await Courses.find({user:req.user.luser.id});
   res.json(data);
 
 });
+router.post("/users",(req,res)=>{
+  content=req.body;
+  res.json(content);
+})
 
 router.delete(
   "/deleteCourse/:id", fetchuser,
